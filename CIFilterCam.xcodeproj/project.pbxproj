@@ -1,0 +1,515 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		374D93E4296F097B006AF29A /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D93E3296F097B006AF29A /* App.swift */; };
+		374D93E6296F097B006AF29A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D93E5296F097B006AF29A /* ContentView.swift */; };
+		374D93E8296F097C006AF29A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 374D93E7296F097C006AF29A /* Assets.xcassets */; };
+		374D93EB296F097C006AF29A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 374D93EA296F097C006AF29A /* Preview Assets.xcassets */; };
+		374D93F9296F098D006AF29A /* ExtensionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D93F8296F098D006AF29A /* ExtensionProvider.swift */; };
+		374D93FB296F098D006AF29A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D93FA296F098D006AF29A /* main.swift */; };
+		374D9400296F098D006AF29A /* dev.noppe.CIFilterCam.Extension.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 374D93F6296F098D006AF29A /* dev.noppe.CIFilterCam.Extension.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		374D9406296F0EB2006AF29A /* ControllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D9405296F0EB2006AF29A /* ControllView.swift */; };
+		374D9408296F14FF006AF29A /* SampleBufferDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D9407296F14FF006AF29A /* SampleBufferDisplayView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		374D93FE296F098D006AF29A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 374D93D8296F097B006AF29A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 374D93F5296F098D006AF29A;
+			remoteInfo = Extension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		374D9404296F098D006AF29A /* Embed System Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(SYSTEM_EXTENSIONS_FOLDER_PATH)";
+			dstSubfolderSpec = 16;
+			files = (
+				374D9400296F098D006AF29A /* dev.noppe.CIFilterCam.Extension.systemextension in Embed System Extensions */,
+			);
+			name = "Embed System Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		374D93E0296F097B006AF29A /* CIFilterCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIFilterCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		374D93E3296F097B006AF29A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		374D93E5296F097B006AF29A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		374D93E7296F097C006AF29A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		374D93EA296F097C006AF29A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		374D93EC296F097C006AF29A /* CIFilterCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CIFilterCam.entitlements; sourceTree = "<group>"; };
+		374D93F6296F098D006AF29A /* dev.noppe.CIFilterCam.Extension.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = dev.noppe.CIFilterCam.Extension.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
+		374D93F8296F098D006AF29A /* ExtensionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionProvider.swift; sourceTree = "<group>"; };
+		374D93FA296F098D006AF29A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		374D93FC296F098D006AF29A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		374D93FD296F098D006AF29A /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Extension.entitlements; sourceTree = "<group>"; };
+		374D9405296F0EB2006AF29A /* ControllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllView.swift; sourceTree = "<group>"; };
+		374D9407296F14FF006AF29A /* SampleBufferDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleBufferDisplayView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		374D93DD296F097B006AF29A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		374D93F3296F098D006AF29A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		374D93D7296F097B006AF29A = {
+			isa = PBXGroup;
+			children = (
+				374D93E2296F097B006AF29A /* CIFilterCam */,
+				374D93F7296F098D006AF29A /* Extension */,
+				374D93E1296F097B006AF29A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		374D93E1296F097B006AF29A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				374D93E0296F097B006AF29A /* CIFilterCam.app */,
+				374D93F6296F098D006AF29A /* dev.noppe.CIFilterCam.Extension.systemextension */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		374D93E2296F097B006AF29A /* CIFilterCam */ = {
+			isa = PBXGroup;
+			children = (
+				374D93E3296F097B006AF29A /* App.swift */,
+				374D93E5296F097B006AF29A /* ContentView.swift */,
+				374D93E7296F097C006AF29A /* Assets.xcassets */,
+				374D9405296F0EB2006AF29A /* ControllView.swift */,
+				374D9407296F14FF006AF29A /* SampleBufferDisplayView.swift */,
+				374D93EC296F097C006AF29A /* CIFilterCam.entitlements */,
+				374D93E9296F097C006AF29A /* Preview Content */,
+			);
+			path = CIFilterCam;
+			sourceTree = "<group>";
+		};
+		374D93E9296F097C006AF29A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				374D93EA296F097C006AF29A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		374D93F7296F098D006AF29A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				374D93F8296F098D006AF29A /* ExtensionProvider.swift */,
+				374D93FA296F098D006AF29A /* main.swift */,
+				374D93FC296F098D006AF29A /* Info.plist */,
+				374D93FD296F098D006AF29A /* Extension.entitlements */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		374D93DF296F097B006AF29A /* CIFilterCam */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 374D93EF296F097C006AF29A /* Build configuration list for PBXNativeTarget "CIFilterCam" */;
+			buildPhases = (
+				374D93DC296F097B006AF29A /* Sources */,
+				374D93DD296F097B006AF29A /* Frameworks */,
+				374D93DE296F097B006AF29A /* Resources */,
+				374D9404296F098D006AF29A /* Embed System Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				374D93FF296F098D006AF29A /* PBXTargetDependency */,
+			);
+			name = CIFilterCam;
+			productName = CIFilterCam;
+			productReference = 374D93E0296F097B006AF29A /* CIFilterCam.app */;
+			productType = "com.apple.product-type.application";
+		};
+		374D93F5296F098D006AF29A /* Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 374D9401296F098D006AF29A /* Build configuration list for PBXNativeTarget "Extension" */;
+			buildPhases = (
+				374D93F2296F098D006AF29A /* Sources */,
+				374D93F3296F098D006AF29A /* Frameworks */,
+				374D93F4296F098D006AF29A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Extension;
+			productName = Extension;
+			productReference = 374D93F6296F098D006AF29A /* dev.noppe.CIFilterCam.Extension.systemextension */;
+			productType = "com.apple.product-type.system-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		374D93D8296F097B006AF29A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					374D93DF296F097B006AF29A = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					374D93F5296F098D006AF29A = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 374D93DB296F097B006AF29A /* Build configuration list for PBXProject "CIFilterCam" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 374D93D7296F097B006AF29A;
+			productRefGroup = 374D93E1296F097B006AF29A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				374D93DF296F097B006AF29A /* CIFilterCam */,
+				374D93F5296F098D006AF29A /* Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		374D93DE296F097B006AF29A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				374D93EB296F097C006AF29A /* Preview Assets.xcassets in Resources */,
+				374D93E8296F097C006AF29A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		374D93F4296F098D006AF29A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		374D93DC296F097B006AF29A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				374D93E6296F097B006AF29A /* ContentView.swift in Sources */,
+				374D9408296F14FF006AF29A /* SampleBufferDisplayView.swift in Sources */,
+				374D9406296F0EB2006AF29A /* ControllView.swift in Sources */,
+				374D93E4296F097B006AF29A /* App.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		374D93F2296F098D006AF29A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				374D93FB296F098D006AF29A /* main.swift in Sources */,
+				374D93F9296F098D006AF29A /* ExtensionProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		374D93FF296F098D006AF29A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 374D93F5296F098D006AF29A /* Extension */;
+			targetProxy = 374D93FE296F098D006AF29A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		374D93ED296F097C006AF29A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		374D93EE296F097C006AF29A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		374D93F0296F097C006AF29A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CIFilterCam/CIFilterCam.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CIFilterCam/Preview Content\"";
+				DEVELOPMENT_TEAM = FBQ6Z8AF3U;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.noppe.CIFilterCam;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		374D93F1296F097C006AF29A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CIFilterCam/CIFilterCam.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CIFilterCam/Preview Content\"";
+				DEVELOPMENT_TEAM = FBQ6Z8AF3U;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.noppe.CIFilterCam;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		374D9402296F098D006AF29A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FBQ6Z8AF3U;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Extension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Extension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.noppe.CIFilterCam.Extension;
+				PRODUCT_NAME = "$(inherited)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		374D9403296F098D006AF29A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FBQ6Z8AF3U;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Extension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Extension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.noppe.CIFilterCam.Extension;
+				PRODUCT_NAME = "$(inherited)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		374D93DB296F097B006AF29A /* Build configuration list for PBXProject "CIFilterCam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				374D93ED296F097C006AF29A /* Debug */,
+				374D93EE296F097C006AF29A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		374D93EF296F097C006AF29A /* Build configuration list for PBXNativeTarget "CIFilterCam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				374D93F0296F097C006AF29A /* Debug */,
+				374D93F1296F097C006AF29A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		374D9401296F098D006AF29A /* Build configuration list for PBXNativeTarget "Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				374D9402296F098D006AF29A /* Debug */,
+				374D9403296F098D006AF29A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 374D93D8296F097B006AF29A /* Project object */;
+}
