@@ -1,9 +1,12 @@
 import SwiftUI
 import CoreMedia
 import AVFoundation
+import Shared
+import Defaults
 
 struct ControllView: View {
     @StateObject var viewModel: ControlViewModel = .init()
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack {
@@ -32,6 +35,13 @@ struct ControllView: View {
                     Toggle("Bypass", isOn: $viewModel.isBypass)
                         .toggleStyle(.checkbox)
                 }
+                
+                Button {
+                    dismiss()
+                } label: {
+                    Text("OK")
+                }
+
             }.padding()
         }.onAppear {
             viewModel.startRunning()
@@ -55,7 +65,7 @@ class ControlViewModel: NSObject, ObservableObject {
     @Published var sampleBuffer: CMSampleBuffer? = nil
     
     @Published var selectedCameraID: Camera.ID = ""
-    @Published var isBypass: Bool = false
+    @Default(.isBypass) var isBypass
     @Published var selectedFilterID: Filter.ID = UUID()
     
     @Published var cameras: [Camera] = []
@@ -80,7 +90,6 @@ class ControlViewModel: NSObject, ObservableObject {
     }()
     
     override init() {
-        let previewCameraModelID = "CIFilterCam Model"
         // https://developer.apple.com/documentation/coremediaio/creating_a_camera_extension_with_core_media_i_o
         let discoverySession = AVCaptureDevice.DiscoverySession(
             deviceTypes: [.externalUnknown, .builtInWideAngleCamera],
@@ -88,10 +97,10 @@ class ControlViewModel: NSObject, ObservableObject {
             position: .unspecified
         )
         let devices = discoverySession.devices
-        let device = devices.first(where: { $0.modelID == previewCameraModelID })!
+        let device = devices.first(where: { $0.modelID == extensionCameraModelID })!
         input = try! AVCaptureDeviceInput(device: device)
         super.init()
-        cameras = devices.filter({ $0.modelID != previewCameraModelID }).map({ Camera(id: $0.uniqueID, name: $0.localizedName) })
+        cameras = [Camera(id: "", name: "-----")] + devices.filter({ $0.modelID != extensionCameraModelID }).map({ Camera(id: $0.uniqueID, name: $0.localizedName) })
     }
     
     func startRunning() {

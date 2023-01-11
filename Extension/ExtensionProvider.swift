@@ -12,6 +12,8 @@ import os.log
 import CoreImage
 import CoreImage.CIFilterBuiltins
 import AVFoundation
+import Shared
+import Defaults
 
 let kFrameRate: Int = 60
 
@@ -31,8 +33,14 @@ class ExtensionDeviceSource: NSObject, CMIOExtensionDeviceSource {
     
     let ciContext = CIContext()
     
+    var isBypass: Bool = false
+    
     let input: AVCaptureDeviceInput = {
-        let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .front)
+        let discoverySession = AVCaptureDevice.DiscoverySession(
+            deviceTypes: [.builtInWideAngleCamera],
+            mediaType: .video,
+            position: .front
+        )
         let device = discoverySession.devices[0]
         return try! AVCaptureDeviceInput(device: device)
     }()
@@ -54,7 +62,7 @@ class ExtensionDeviceSource: NSObject, CMIOExtensionDeviceSource {
     }()
 	
 	init(localizedName: String) {
-		
+        
 		super.init()
 		let deviceID = UUID() // replace this with your device UUID
 		self.device = CMIOExtensionDevice(localizedName: localizedName, deviceID: deviceID, legacyDeviceID: nil, source: self)
@@ -79,6 +87,12 @@ class ExtensionDeviceSource: NSObject, CMIOExtensionDeviceSource {
 		} catch let error {
 			fatalError("Failed to add stream: \(error.localizedDescription)")
 		}
+        
+        Task {
+            for await isBypass in Defaults.updates(.isBypass) {
+                self.isBypass = isBypass
+            }
+        }
 	}
 	
 	var availableProperties: Set<CMIOExtensionProperty> {
@@ -93,7 +107,7 @@ class ExtensionDeviceSource: NSObject, CMIOExtensionDeviceSource {
 			deviceProperties.transportType = kIOAudioDeviceTransportTypeVirtual
 		}
 		if properties.contains(.deviceModel) {
-			deviceProperties.model = "CIFilterCam Model"
+			deviceProperties.model = extensionCameraModelID
 		}
 		
 		return deviceProperties
@@ -115,6 +129,11 @@ class ExtensionDeviceSource: NSObject, CMIOExtensionDeviceSource {
 
 extension ExtensionDeviceSource: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        if isBypass {
+            _streamSource.stream.send(sampleBuffer, discontinuity: .time, hostTimeInNanoseconds: 0)
+            return
+        }
+        
         let imageBuffer = sampleBuffer.imageBuffer!
         CVPixelBufferLockBaseAddress(imageBuffer, .readOnly)
         defer {
