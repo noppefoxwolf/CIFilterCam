@@ -24,6 +24,9 @@
 		374D9439296F3203006AF29A /* Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 374D942A296F31F8006AF29A /* Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		374D943F296F321B006AF29A /* Default+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D943E296F321B006AF29A /* Default+.swift */; };
 		374D9441296F33BF006AF29A /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 374D9440296F33BF006AF29A /* Defaults */; };
+		374D944329704E53006AF29A /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D944229704E53006AF29A /* Filter.swift */; };
+		374D944529706536006AF29A /* AVFoundation+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D944429706536006AF29A /* AVFoundation+.swift */; };
+		374D944729706AB4006AF29A /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D944629706AB4006AF29A /* Camera.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +106,9 @@
 		374D942A296F31F8006AF29A /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		374D943D296F3206006AF29A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		374D943E296F321B006AF29A /* Default+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Default+.swift"; sourceTree = "<group>"; };
+		374D944229704E53006AF29A /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		374D944429706536006AF29A /* AVFoundation+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVFoundation+.swift"; sourceTree = "<group>"; };
+		374D944629706AB4006AF29A /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +207,9 @@
 			isa = PBXGroup;
 			children = (
 				374D943E296F321B006AF29A /* Default+.swift */,
+				374D944229704E53006AF29A /* Filter.swift */,
+				374D944429706536006AF29A /* AVFoundation+.swift */,
+				374D944629706AB4006AF29A /* Camera.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -381,7 +390,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				374D944729706AB4006AF29A /* Camera.swift in Sources */,
 				374D943F296F321B006AF29A /* Default+.swift in Sources */,
+				374D944329704E53006AF29A /* Filter.swift in Sources */,
+				374D944529706536006AF29A /* AVFoundation+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,7 +608,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.noppe.CIFilterCam.Extension;
 				PRODUCT_NAME = "$(inherited)";
@@ -623,7 +635,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.noppe.CIFilterCam.Extension;
 				PRODUCT_NAME = "$(inherited)";
@@ -653,7 +665,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.noppe.Shared;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -686,7 +698,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.noppe.Shared;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";

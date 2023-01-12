@@ -7,12 +7,14 @@
 
 import SwiftUI
 import SystemExtensions
+import Shared
 
 struct ContentView: View {
     @StateObject var installer: Installer = Installer()
     @State var isPresented: Bool = false
     
     var body: some View {
+
         VStack(alignment: .leading) {
             HStack {
                 Button {
@@ -49,9 +51,8 @@ class Installer: NSObject, ObservableObject {
     @Published var message: String = "Log Text"
     
     func install() {
-        let extensionIdentifier = "dev.noppe.CIFilterCam.Extension"
         let activationRequest = OSSystemExtensionRequest.activationRequest(
-            forExtensionWithIdentifier: extensionIdentifier,
+            forExtensionWithIdentifier: extensionBundleID,
             queue: .main
         )
         activationRequest.delegate = self
@@ -59,9 +60,8 @@ class Installer: NSObject, ObservableObject {
     }
     
     func uninstall() {
-        let extensionIdentifier = "dev.noppe.CIFilterCam.Extension"
         let activationRequest = OSSystemExtensionRequest.deactivationRequest(
-            forExtensionWithIdentifier: extensionIdentifier,
+            forExtensionWithIdentifier: extensionBundleID,
             queue: .main
         )
         activationRequest.delegate = self
@@ -75,7 +75,6 @@ extension Installer: OSSystemExtensionRequestDelegate {
     }
     
     func requestNeedsUserApproval(_ request: OSSystemExtensionRequest) {
-        print("Approval")
         message = #function
     }
     
@@ -85,8 +84,6 @@ extension Installer: OSSystemExtensionRequestDelegate {
     }
     
     func request(_ request: OSSystemExtensionRequest, didFailWithError error: Error) {
-        print(error)
-        
         message = error.localizedDescription
     }
 }

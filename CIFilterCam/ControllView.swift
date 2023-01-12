@@ -14,7 +14,7 @@ struct ControllView: View {
                 .background(Color.black)
             Grid {
                 GridRow {
-                    Picker(selection: $viewModel.selectedCameraID) {
+                    Picker(selection: viewModel.$deviceID) {
                         ForEach(viewModel.cameras) { camera in
                             Text(camera.name)
                                 .tag(camera.id)
@@ -25,14 +25,14 @@ struct ControllView: View {
                 }
                 
                 HStack {
-                    Picker(selection: $viewModel.selectedFilterID) {
-                        ForEach(viewModel.filters) { filter in
-                            Text(filter.name).tag(filter.id)
+                    Picker(selection: viewModel.$filter) {
+                        ForEach(viewModel.filters, id: \.id) { filter in
+                            Text(filter.rawValue).tag(filter)
                         }
                     } label: {
                         Text("Filters:")
                     }
-                    Toggle("Bypass", isOn: $viewModel.isBypass)
+                    Toggle("Bypass", isOn: viewModel.$isBypass)
                         .toggleStyle(.checkbox)
                 }
                 
@@ -41,7 +41,6 @@ struct ControllView: View {
                 } label: {
                     Text("OK")
                 }
-
             }.padding()
         }.onAppear {
             viewModel.startRunning()
@@ -51,28 +50,21 @@ struct ControllView: View {
     }
 }
 
-struct Filter: Identifiable {
-    var id: UUID
-    var name: String
-}
-
-struct Camera: Identifiable {
-    var id: String
-    var name: String
-}
-
 class ControlViewModel: NSObject, ObservableObject {
     @Published var sampleBuffer: CMSampleBuffer? = nil
     
-    @Published var selectedCameraID: Camera.ID = ""
-    @Default(.isBypass) var isBypass
-    @Published var selectedFilterID: Filter.ID = UUID()
-    
+    @Default(.deviceID) var deviceID: String
     @Published var cameras: [Camera] = []
-    @Published var filters: [Filter] = []
     
-    let input: AVCaptureDeviceInput
+    @Default(.isBypass) var isBypass
+    @Default(.filter) var filter: Filter
+    let filters: [Filter] = Filter.allCases
     
+    let input: AVCaptureDeviceInput = {
+        let device = AVCaptureDevice.DiscoverySession.extensionDevice()
+        return try! AVCaptureDeviceInput(device: device)
+    }()
+
     let output: AVCaptureVideoDataOutput = {
         let output = AVCaptureVideoDataOutput()
         output.videoSettings = [
@@ -90,17 +82,13 @@ class ControlViewModel: NSObject, ObservableObject {
     }()
     
     override init() {
-        // https://developer.apple.com/documentation/coremediaio/creating_a_camera_extension_with_core_media_i_o
-        let discoverySession = AVCaptureDevice.DiscoverySession(
-            deviceTypes: [.externalUnknown, .builtInWideAngleCamera],
-            mediaType: .video,
-            position: .unspecified
-        )
-        let devices = discoverySession.devices
-        let device = devices.first(where: { $0.modelID == extensionCameraModelID })!
-        input = try! AVCaptureDeviceInput(device: device)
         super.init()
-        cameras = [Camera(id: "", name: "-----")] + devices.filter({ $0.modelID != extensionCameraModelID }).map({ Camera(id: $0.uniqueID, name: $0.localizedName) })
+        let availableDevices = AVCaptureDevice
+            .DiscoverySession
+            .devicesWithoutExtension()
+            .map({ Camera(id: $0.uniqueID, name: $0.localizedName) })
+        
+        cameras = [.none] + availableDevices
     }
     
     func startRunning() {

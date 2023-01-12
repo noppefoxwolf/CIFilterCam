@@ -20,46 +20,58 @@ let kFrameRate: Int = 60
 // MARK: -
 
 class ExtensionDeviceSource: NSObject, CMIOExtensionDeviceSource {
-	
-	private(set) var device: CMIOExtensionDevice!
-	
-	private var _streamSource: ExtensionStreamSource!
-	
-	private var _videoDescription: CMFormatDescription!
-	
-	private var _bufferPool: CVPixelBufferPool!
     
-    let filter = CIFilter.sepiaTone()
+    private(set) var device: CMIOExtensionDevice!
+    
+    private var _streamSource: ExtensionStreamSource!
+    
+    private var _videoDescription: CMFormatDescription!
+    
+    private var _bufferPool: CVPixelBufferPool!
+    
+    var filter: Filter = .sepiaTone
     
     let ciContext = CIContext()
     
-    var isBypass: Bool = false
+    var isBypass: Bool = true
     
-    let input: AVCaptureDeviceInput = {
+    var input: AVCaptureDeviceInput? = nil {
+        didSet {
+            session.beginConfiguration()
+            if let oldValue = oldValue {
+                session.removeInput(oldValue)
+            }
+            if let newValue = input {
+                session.addInput(newValue)
+            }
+            session.commitConfiguration()
+        }
+    }
+    
+    func findCaptureDevice(by id: String) -> AVCaptureDeviceInput? {
         let discoverySession = AVCaptureDevice.DiscoverySession(
-            deviceTypes: [.builtInWideAngleCamera],
+            deviceTypes: [.builtInWideAngleCamera, .externalUnknown, .deskViewCamera, .builtInMicrophone],
             mediaType: .video,
-            position: .front
+            position: .unspecified
         )
-        let device = discoverySession.devices[0]
-        return try! AVCaptureDeviceInput(device: device)
-    }()
+        let devices = discoverySession.devices
+        guard let device = devices.first(where: { $0.uniqueID == id }) else { return nil }
+        return try? AVCaptureDeviceInput(device: device)
+    }
     
-    let output: AVCaptureVideoDataOutput = {
+    lazy var output: AVCaptureVideoDataOutput = {
         let output = AVCaptureVideoDataOutput()
         output.videoSettings = [
             kCVPixelBufferPixelFormatTypeKey as String : kCVPixelFormatType_32BGRA
         ]
+        output.setSampleBufferDelegate(self, queue: .main)
+        session.beginConfiguration()
+        session.addOutput(output)
+        session.commitConfiguration()
         return output
     }()
     
-    lazy var session: AVCaptureSession = {
-        var session = AVCaptureSession()
-        session.addInput(input)
-        output.setSampleBufferDelegate(self, queue: .main)
-        session.addOutput(output)
-        return session
-    }()
+    let session: AVCaptureSession = AVCaptureSession()
 	
 	init(localizedName: String) {
         
@@ -88,12 +100,29 @@ class ExtensionDeviceSource: NSObject, CMIOExtensionDeviceSource {
 			fatalError("Failed to add stream: \(error.localizedDescription)")
 		}
         
+        _ = output
+        observeSettings()
+	}
+    
+    func observeSettings() {
         Task {
             for await isBypass in Defaults.updates(.isBypass) {
                 self.isBypass = isBypass
             }
         }
-	}
+        Task {
+            for await uniqID in Defaults.updates(.deviceID) {
+                if let deviceInput = findCaptureDevice(by: uniqID) {
+                    self.input = deviceInput
+                }
+            }
+        }
+        Task {
+            for await filter in Defaults.updates(.filter) {
+                self.filter = filter
+            }
+        }
+    }
 	
 	var availableProperties: Set<CMIOExtensionProperty> {
 		
@@ -168,13 +197,12 @@ extension ExtensionDeviceSource: AVCaptureVideoDataOutputSampleBufferDelegate {
         if status != 0 {
             fatalError()
         }
-
-        let ciImage = CIImage(cvImageBuffer: imageBuffer)
         
-        filter.inputImage = ciImage
-        let outputImage = filter.outputImage!
-        ciContext.render(outputImage, to: pixelBufferOut!)
-
+        let inputImage = CIImage(cvImageBuffer: imageBuffer)
+        if let outputImage = filter.apply(to: inputImage) {
+            ciContext.render(outputImage, to: pixelBufferOut!)
+        }
+        
         let hostTimeInNanoseconds = UInt64(timingInfoOut.presentationTimeStamp.seconds * Double(NSEC_PER_SEC))
         _streamSource.stream.send(sampleBufferOut!, discontinuity: [], hostTimeInNanoseconds: hostTimeInNanoseconds)
     }
