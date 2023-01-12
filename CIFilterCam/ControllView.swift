@@ -12,6 +12,7 @@ struct ControllView: View {
         VStack {
             SampleBufferDisplayView(sampleBuffer: viewModel.sampleBuffer)
                 .background(Color.black)
+                .scaleEffect(x: -1)
             Grid {
                 GridRow {
                     Picker(selection: viewModel.$deviceID) {
