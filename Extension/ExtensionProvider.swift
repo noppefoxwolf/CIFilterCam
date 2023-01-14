@@ -50,7 +50,7 @@ class ExtensionDeviceSource: NSObject, CMIOExtensionDeviceSource {
     
     func findCaptureDevice(by id: String) -> AVCaptureDeviceInput? {
         let discoverySession = AVCaptureDevice.DiscoverySession(
-            deviceTypes: [.builtInWideAngleCamera, .externalUnknown, .deskViewCamera, .builtInMicrophone],
+            deviceTypes: [.builtInWideAngleCamera, .externalUnknown, .deskViewCamera],
             mediaType: .video,
             position: .unspecified
         )
@@ -161,50 +161,13 @@ extension ExtensionDeviceSource: AVCaptureVideoDataOutputSampleBufferDelegate {
         if isBypass {
             _streamSource.stream.send(sampleBuffer, discontinuity: .time, hostTimeInNanoseconds: 0)
             return
+        } else {
+            let inputImage = CIImage(cvImageBuffer: sampleBuffer.imageBuffer!)
+            if let outputImage = filter.apply(to: inputImage) {
+                ciContext.render(outputImage, to: sampleBuffer.imageBuffer!)
+            }
+            _streamSource.stream.send(sampleBuffer, discontinuity: .time, hostTimeInNanoseconds: 0)
         }
-        
-        let imageBuffer = sampleBuffer.imageBuffer!
-        CVPixelBufferLockBaseAddress(imageBuffer, .readOnly)
-        defer {
-            CVPixelBufferUnlockBaseAddress(imageBuffer, .readOnly)
-        }
-
-        var pixelBufferOut: CVPixelBuffer? = nil
-        let cvReturn = CVPixelBufferPoolCreatePixelBuffer(kCFAllocatorDefault, _bufferPool, &pixelBufferOut)
-        if cvReturn == kCVReturnError {
-            fatalError()
-        }
-
-        var status: OSStatus = 0
-        
-        var timingInfoOut = CMSampleTimingInfo()
-        timingInfoOut.presentationTimeStamp = CMClockGetTime(CMClockGetHostTimeClock())
-
-        var formatDesc: CMFormatDescription?
-        status = CMVideoFormatDescriptionCreateForImageBuffer(allocator: kCFAllocatorDefault,
-                                                     imageBuffer: pixelBufferOut!,
-                                                     formatDescriptionOut: &formatDesc)
-        if status != 0 {
-            fatalError()
-        }
-
-        var sampleBufferOut: CMSampleBuffer?
-        status = CMSampleBufferCreateReadyWithImageBuffer(allocator: kCFAllocatorDefault,
-                                                              imageBuffer: pixelBufferOut!,
-                                                              formatDescription: formatDesc!,
-                                                              sampleTiming: &timingInfoOut,
-                                                              sampleBufferOut: &sampleBufferOut)
-        if status != 0 {
-            fatalError()
-        }
-        
-        let inputImage = CIImage(cvImageBuffer: imageBuffer)
-        if let outputImage = filter.apply(to: inputImage) {
-            ciContext.render(outputImage, to: pixelBufferOut!)
-        }
-        
-        let hostTimeInNanoseconds = UInt64(timingInfoOut.presentationTimeStamp.seconds * Double(NSEC_PER_SEC))
-        _streamSource.stream.send(sampleBufferOut!, discontinuity: [], hostTimeInNanoseconds: hostTimeInNanoseconds)
     }
     
     func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {

@@ -12,9 +12,10 @@ import Shared
 struct ContentView: View {
     @StateObject var installer: Installer = Installer()
     @State var isPresented: Bool = false
+    @State var isPresentedDebug: Bool = false
     
     var body: some View {
-
+        
         VStack(alignment: .leading) {
             HStack {
                 Button {
@@ -31,10 +32,17 @@ struct ContentView: View {
             
             Text(installer.message)
             
-            Button {
-                isPresented.toggle()
-            } label: {
-                Text("Show camera control")
+            HStack {
+                Button {
+                    isPresented.toggle()
+                } label: {
+                    Text("Show camera control")
+                }
+                Button {
+                    isPresentedDebug.toggle()
+                } label: {
+                    Text("Show debug")
+                }
             }
             
             Spacer()
@@ -42,6 +50,10 @@ struct ContentView: View {
         .padding()
         .sheet(isPresented: $isPresented) {
             ControllView()
+                .frame(width: 640, height: 480)
+        }
+        .sheet(isPresented: $isPresentedDebug) {
+            DebugView()
                 .frame(width: 640, height: 480)
         }
     }

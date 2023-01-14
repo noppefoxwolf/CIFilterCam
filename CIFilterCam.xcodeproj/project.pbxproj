@@ -27,6 +27,7 @@
 		374D944329704E53006AF29A /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D944229704E53006AF29A /* Filter.swift */; };
 		374D944529706536006AF29A /* AVFoundation+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D944429706536006AF29A /* AVFoundation+.swift */; };
 		374D944729706AB4006AF29A /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374D944629706AB4006AF29A /* Camera.swift */; };
+		37C873772971F25C00687DD1 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C873762971F25C00687DD1 /* DebugView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		374D944229704E53006AF29A /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		374D944429706536006AF29A /* AVFoundation+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVFoundation+.swift"; sourceTree = "<group>"; };
 		374D944629706AB4006AF29A /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		37C873762971F25C00687DD1 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 				374D9407296F14FF006AF29A /* SampleBufferDisplayView.swift */,
 				374D93EC296F097C006AF29A /* CIFilterCam.entitlements */,
 				374D93E9296F097C006AF29A /* Preview Content */,
+				37C873762971F25C00687DD1 /* DebugView.swift */,
 			);
 			path = CIFilterCam;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				374D93E6296F097B006AF29A /* ContentView.swift in Sources */,
+				37C873772971F25C00687DD1 /* DebugView.swift in Sources */,
 				374D9408296F14FF006AF29A /* SampleBufferDisplayView.swift in Sources */,
 				374D9406296F0EB2006AF29A /* ControllView.swift in Sources */,
 				374D93E4296F097B006AF29A /* App.swift in Sources */,
